@@ -5,7 +5,7 @@
     private $host = 'localhost';
     private $db_name = 'dbbeavertest';
     private $username = 'dylan326';
-    private $password = 'Ut87Ut87';
+    private $password = 'password';
     private $conn;
      // DB Connect
      public function connect() {
