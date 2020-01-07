@@ -1,18 +1,14 @@
 <?php
 
-class Post {
+class Category {
     //DB stuff
 
     private $conn;
-    private $table = 'posts';
+    private $table = 'categories';
 
     //post properties
     public $id;
-    public $category_id;
-    public $category_name;
-    public $title;
-    public $body;
-    public $author;
+    public $name;
     public $created_at;
 
 
@@ -27,9 +23,7 @@ class Post {
     public function read()
     { //create query
 
-        $query = 'SELECT categories.name as category_name, posts.id, posts.category_id, posts.title, posts.body, posts.author, posts.created_at 
-                  FROM '.$this->table.' LEFT JOIN categories ON posts.category_id = categories.id 
-                  ORDER BY posts.created_at DESC';
+        $query = 'SELECT * FROM '.$this->table.' ORDER BY created_at DESC';
 
         //prepared statement
 
@@ -46,15 +40,16 @@ class Post {
 
     public function read_single() {
 
-        $query = 'SELECT categories.name as category_name, posts.id, posts.category_id, posts.title, posts.body, posts.author, posts.created_at
-                  FROM '.$this->table.' LEFT JOIN categories ON posts.category_id = categories.id 
-                  where posts.id = ? limit 0,1';
+        $query = 'SELECT * 
+                  FROM '.$this->table.'
+                  where id = ? limit 0,1';
 
         //prepared statement
 
         $stmt = $this->conn->prepare($query);
+
         
-       
+         //bind param
 
          $stmt->bindParam(1, $this->id);
 
@@ -65,16 +60,13 @@ class Post {
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         //set properties
-        $this->title = $row['title'];
-        $this->body = $row['body'];
-        $this->author = $row['author'];
-        $this->category_id = $row['category_id'];
-        $this->category_name = $row['category_name'];
+       
+        $this->name = $row['name'];
 
 
     }
 
-    public function create() {
+    /*public function create() {
         //create query
         $query = 'INSERT INTO ' . $this->table . '
         SET
@@ -180,5 +172,6 @@ class Post {
          printf("Error: %s.\n", $stmt->error);
 
          return false;
-    }
+    }*/
 }
+
