@@ -66,14 +66,11 @@ class Category {
 
     }
 
-    /*public function create() {
+    public function create() {
         //create query
         $query = 'INSERT INTO ' . $this->table . '
         SET
-         title = :title,
-         body = :body,
-         author = :author,
-         category_id = :category_id
+         name = :name
          ';
 
          //prepare statement
@@ -81,17 +78,13 @@ class Category {
          $stmt = $this->conn->prepare($query);
 
          //clean data
-         $this->title = htmlspecialchars(strip_tags($this->title));
-         $this->body = htmlspecialchars(strip_tags($this->body));
-         $this->author = htmlspecialchars(strip_tags($this->author));
-         $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+         $this->name = htmlspecialchars(strip_tags($this->name));
+       
 
          //bind the data
 
-         $stmt->bindParam(':title', $this->title);
-         $stmt->bindParam(':body', $this->body);
-         $stmt->bindParam(':author', $this->author);
-         $stmt->bindParam(':category_id', $this->category_id);
+         $stmt->bindParam(':name', $this->name);
+       
 
          //execute query
          if($stmt->execute())
@@ -109,10 +102,7 @@ class Category {
         //create query
         $query = 'UPDATE ' . $this->table . '
         SET
-         title = :title,
-         body = :body,
-         author = :author,
-         category_id = :category_id
+         name = :name
         WHERE
          id = :id
          ';
@@ -122,19 +112,15 @@ class Category {
          $stmt = $this->conn->prepare($query);
 
          //clean data
-         $this->title = htmlspecialchars(strip_tags($this->title));
-         $this->body = htmlspecialchars(strip_tags($this->body));
-         $this->author = htmlspecialchars(strip_tags($this->author));
-         $this->category_id = htmlspecialchars(strip_tags($this->category_id));
+         $this->name = htmlspecialchars(strip_tags($this->name));
+         
          $this->id = htmlspecialchars(strip_tags($this->id));
 
 
          //bind the data
 
-         $stmt->bindParam(':title', $this->title);
-         $stmt->bindParam(':body', $this->body);
-         $stmt->bindParam(':author', $this->author);
-         $stmt->bindParam(':category_id', $this->category_id);
+         $stmt->bindParam(':name', $this->name);
+        
          $stmt->bindParam(':id', $this->id);
 
          //execute query
@@ -149,7 +135,7 @@ class Category {
          return false;
     }
 
-    //delete post
+    //delete category
 
     public function delete()
     {
@@ -172,6 +158,6 @@ class Category {
          printf("Error: %s.\n", $stmt->error);
 
          return false;
-    }*/
+    }
 }
 
